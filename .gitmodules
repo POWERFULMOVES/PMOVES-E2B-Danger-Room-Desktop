@@ -1,0 +1,4 @@
+[submodule "PMOVES-E2B-Danger-Room-Deskdesktop"]
+	path = PMOVES-E2B-Danger-Room-Deskdesktop
+	url = https://github.com/POWERFULMOVES/PMOVES-E2B-Danger-Room-Deskdesktop.git
+	branch = PMOVES.AI-Edition-Hardened
