@@ -1,77 +1,39 @@
-# PMOVES.AI Integration Guide for E2B Danger Room Desktop
+# PMOVES.AI Integration Dossier
 
-## Integration Complete
+_Last updated: 2026-04-04_
 
-The PMOVES.AI integration template has been applied to E2B Danger Room Desktop.
+## Module
+- Name: PMOVES-E2B-Danger-Room-Desktop
+- Path: PMOVES-E2B-Danger-Room-Desktop
 
-## Next Steps
+## Purpose in PMOVES.AI
+- Desktop variant of E2B sandbox for GUI-based agent workflows.
 
-### 1. Customize Environment Variables
+## PMOVES Overlay Surface
+- pmoves-integrations/ overlay path (if used): _TBD_
+- Compose/profile wiring: _TBD_
+- Env/secret inputs: _TBD_
+- Auth/JWT requirements: _TBD_
 
-Edit the following files with your service-specific values:
+## Contracts and Topics
+- NATS subjects (if any): _TBD_
+- Supabase schema/tables touched (if any): _TBD_
+- MCP endpoints/skills (if any): _TBD_
 
-- `env.shared` - Base environment configuration
-- `env.tier-agent` - AGENT tier specific configuration
-- `chit/secrets_manifest_v2.yaml` - Add your service's required secrets
+## Boot Order and Health
+- Bring-up dependency order: _TBD_
+- Health endpoints: _TBD_
+- Smoke targets: _TBD_
 
-### 2. Update Docker Compose
+## Hardening Notes
+- Image pinning / provenance: _TBD_
+- Secrets source (*_FILE / vault / GH env): _TBD_
+- Network/security policy constraints: _TBD_
 
-Add the PMOVES.AI environment anchor to your `docker-compose.yml`:
+## Source Documentation
+- Upstream docs entrypoint: README.md
+- PMOVES docs index reference: pmoves/docs/SUBMODULE_DOCS_DOSSIER.md
 
-```yaml
-services:
-  e2b-danger-room-desktop:
-    <<: [*env-tier-agent, *pmoves-healthcheck]
-    # Your existing service configuration...
-```
-
-### 3. Integrate Health Check
-
-Add the health check endpoint to your service:
-
-```python
-from pmoves_health import add_custom_check, get_health_status
-
-@app.get("/healthz")
-async def health_check():
-    return await get_health_status()
-```
-
-### 4. Add Service Announcement
-
-Add NATS service announcement to your startup:
-
-```python
-from pmoves_announcer import announce_service
-
-@app.on_event("startup")
-async def startup():
-    await announce_service(
-        slug="e2b-danger-room-desktop",
-        name="E2B Danger Room Desktop Sandbox",
-        url=f"http://e2b-danger-room-desktop:0",
-        port=0,
-        tier="agent"
-    )
-```
-
-### 5. Test Integration
-
-```bash
-# Verify environment variables loaded
-docker compose exec e2b-danger-room-desktop env | grep PMOVES
-```
-
-## Service Details
-
-- **Name:** E2B Danger Room Desktop Sandbox
-- **Slug:** e2b-danger-room-desktop
-- **Tier:** agent (sandbox)
-- **Port:** VNC/API (E2B cloud)
-- **Health Check:** N/A
-- **NATS Enabled:** False
-- **GPU Enabled:** False
-
-## Support
-
-For questions or issues, see the PMOVES.AI documentation.
+## Owner / Audit
+- Owning lane: _TBD_
+- Last integration audit run: 2026-04-04
